@@ -1,0 +1,183 @@
+
+
+// import 'package:flutter/material.dart';
+
+// class CustomDatePicker extends StatefulWidget {
+//   const CustomDatePicker({super.key});
+
+
+//   @override
+//   State<CustomDatePicker> createState() => _CustomDatePickerState();
+// }
+
+// class _CustomDatePickerState extends State<CustomDatePicker> {
+//   DateTime dateTime = DateTime(2023,01,01,2,30);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     final hours = dateTime.hour.toString().padLeft(2,'0');
+//     final minutes = dateTime.minute.toString().padLeft(2,'0');
+
+//     return Container(
+//       child: Column(
+//         mainAxisAlignment: MainAxisAlignment.center,
+//         children:  [const Text('Date and Time'),
+//         const SizedBox(height: 10,),
+//         ElevatedButton(child: Text('${dateTime.year}/${dateTime.month}/${dateTime.day} $hours:$minutes'),
+//         onPressed: () async {
+          
+//           final date = await pickDateTime();
+//           if(date == null) return;
+//           setState(() => dateTime = date);
+//         } )
+//         ],
+//       ),
+//     );
+//   }
+
+//   Future pickDateTime() async{
+//     DateTime? date = await pickDate();
+//     if(date == null) return;
+
+//     TimeOfDay? time = await pickTime();
+//     if(time == null) return;
+
+//     final dateTime = DateTime(
+//       date.year,
+//       date.month,
+//       date.minute,
+//       time.hour,
+//       time.minute,
+//     );
+//     setState(() => this.dateTime = dateTime);
+//   }
+
+//   Future<DateTime?> pickDate() => showDatePicker(
+//     context: context,
+//     initialDate: dateTime,
+//     firstDate: DateTime(2020),
+//     lastDate: DateTime(2050),
+    
+//     );
+    
+//     Future<TimeOfDay?> pickTime() => showTimePicker(
+//     context: context,
+//     initialTime: TimeOfDay(hour: dateTime.hour, minute: dateTime.minute),
+    
+    
+//     );
+// }
+//
+
+
+import 'package:flutter/material.dart';
+
+class CustomDatePicker extends StatefulWidget {
+  const CustomDatePicker({super.key});
+
+
+  @override
+  State<CustomDatePicker> createState() => _CustomDatePickerState();
+}
+
+class _CustomDatePickerState extends State<CustomDatePicker> {
+  DateTime dateTimePetrol = DateTime(2023,01,01,2,30);
+  DateTime dateTimeDiesel = DateTime(2023,02,01,6,30);
+  
+
+  @override
+  Widget build(BuildContext context) {
+    final hoursPetrol = dateTimePetrol.hour.toString().padLeft(2,'0');
+    final minutesPetrol = dateTimePetrol.minute.toString().padLeft(2,'0');
+    final hoursDiesel = dateTimeDiesel.hour.toString().padLeft(2,'0');
+    final minutesDiesel = dateTimeDiesel.minute.toString().padLeft(2,'0');
+
+    return Container(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children:  [const Text('Date and Time petrol'),
+        const SizedBox(height: 10,),
+        ElevatedButton(child: Text('${dateTimePetrol.year}/${dateTimePetrol.month}/${dateTimePetrol.day} $hoursPetrol:$minutesPetrol'),
+        onPressed: () async {
+          
+          final datePetrol = await pickDateTime();
+          if(datePetrol == null) return;
+          setState(() => dateTimePetrol = datePetrol);
+
+
+        } ),const Text('Date and Time petrol'),
+        const SizedBox(height: 10,),
+        ElevatedButton(child: Text('${dateTimeDiesel.year}/${dateTimeDiesel.month}/${dateTimeDiesel.day} $hoursDiesel:$minutesDiesel'),
+        onPressed: () async {
+          
+          final dateDiesel = await pickDateTimeDiesel();
+          if(dateDiesel == null) return;
+          setState(() => dateTimeDiesel = dateDiesel);
+        } ),
+        ],
+      ),
+    );
+  }
+
+  Future pickDateTime() async{
+    DateTime? datePetorl = await pickDate();
+    if(datePetorl == null) return;
+
+    TimeOfDay? timePetrol = await pickTime();
+    if(timePetrol == null) return;
+
+    final dateTimePetrol = DateTime(
+      datePetorl.year,
+      datePetorl.month,
+      datePetorl.day,
+      timePetrol.hour,
+      timePetrol.minute,
+    );
+    setState(() => this.dateTimePetrol = dateTimePetrol);
+  }
+
+  Future<DateTime?> pickDate() => showDatePicker(
+    context: context,
+    initialDate: dateTimePetrol,
+    firstDate: DateTime(2020),
+    lastDate: DateTime(2050),
+    
+    );
+    
+    Future<TimeOfDay?> pickTime() => showTimePicker(
+    context: context,
+    initialTime: TimeOfDay(hour: dateTimePetrol.hour, minute: dateTimePetrol.minute),
+    
+    
+    );Future pickDateTimeDiesel() async{
+    DateTime? dateDiesel = await pickDateDiesel();
+    if(dateDiesel == null) return;
+
+    TimeOfDay? timeDiesel = await pickTimeDiesel();
+    if(timeDiesel == null) return;
+
+    final dateTimeDiesel = DateTime(
+      dateDiesel.year,
+      dateDiesel.month,
+      dateDiesel.day,
+      timeDiesel.hour,
+      timeDiesel.minute,
+    );
+    setState(() => this.dateTimeDiesel = dateTimeDiesel);
+  }
+
+  Future<DateTime?> pickDateDiesel() => showDatePicker(
+    context: context,
+    initialDate: dateTimeDiesel,
+    firstDate: DateTime(2020),
+    lastDate: DateTime(2050),
+    
+    );
+    
+    Future<TimeOfDay?> pickTimeDiesel() => showTimePicker(
+    context: context,
+    initialTime: TimeOfDay(hour: dateTimeDiesel.hour, minute: dateTimeDiesel.minute),
+    
+    
+    );
+}
